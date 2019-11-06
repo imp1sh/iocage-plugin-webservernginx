@@ -71,9 +71,9 @@ http {
         access_log   /var/log/nginx/access.log;
         error_log    /var/log/nginx/error.log;
 
-        location ~ [^/]\.php(/|$) {
-            fastcgi_split_path_info ^(.+?\.php)(/.*)$;
-            if (!-f $document_root$fastcgi_script_name) {
+        location ~ [^/]\.php(/|\$) {
+            fastcgi_split_path_info ^(.+?\.php)(/.*)\$;
+            if (!-f \$document_root\$fastcgi_script_name) {
                     return 404;
             }
 
@@ -88,7 +88,7 @@ http {
 
             # SCRIPT_FILENAME parameter is used for PHP FPM determining
             # the script name.
-            fastcgi_param  SCRIPT_FILENAME   $document_root$fastcgi_script_name;
+            fastcgi_param  SCRIPT_FILENAME   \$document_root\$fastcgi_script_name;
         }
     }
 }
